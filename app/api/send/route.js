@@ -5,12 +5,12 @@ const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
 const fromEmail = process.env.NEXT_PUBLIC_FROM_EMAIL;
 
 export async function POST(req, res) {
-  const { body } = await req.json();
-  const { email, subject, message } = body;
+  const { email, subject, message } = await req.json();
+
   try {
     const data = await resend.emails.send({
       from: fromEmail,
-      to: ["mahmoudkhodor00@gmail.com", email],
+      to: [fromEmail, email],
       subject: subject,
       react: (
         <>
@@ -21,12 +21,8 @@ export async function POST(req, res) {
         </>
       ),
     });
-
     return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.error({
-      status: 500,
-      message: error.message,
-    });
+    return NextResponse.json({ error });
   }
 }

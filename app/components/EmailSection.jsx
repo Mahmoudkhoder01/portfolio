@@ -5,39 +5,53 @@ import Image from "next/image";
 
 const EmailSection = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSending(true);
 
     const data = {
       email: e.target.email.value,
       subject: e.target.subject.value,
       message: e.target.message.value,
     };
-    const JSONdata = JSON.stringify(data);
-    const endPoint = "/api/send";
 
+    const JSONdata = JSON.stringify(data);
+
+    const endpoint = "/api/send";
+
+    // Form the request for sending data to the server.
     const options = {
+      // The method is POST because we are sending data.
       method: "POST",
+      // Tell the server we're sending JSON.
       headers: {
         "Content-Type": "application/json",
       },
+      // Body of the request is the JSON data we created above.
       body: JSONdata,
     };
 
-    const response = await fetch(endPoint, options);
+    const response = await fetch(endpoint, options);
 
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
-    const resData = await response.json();
-
-    if (resData.status === "success") {
+    if (response.status === 200) {
       setEmailSubmitted(true);
+      setSending(false);
+
+      // Clear the form inputs
+      e.target.email.value = "";
+      e.target.subject.value = "";
+      e.target.message.value = "";
+
+      // Reset setEmailSubmitted to false after 2 seconds
+      setTimeout(() => {
+        setEmailSubmitted(false);
+      }, 2000);
+    } else {
+      setSending(false);
     }
   };
-
   return (
     <section
       id="contact"
@@ -122,8 +136,9 @@ const EmailSection = () => {
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2.5 px-5 rounded-lg w-full"
+            disabled={sending}
           >
-            Send Message
+            {sending ? "Sending..." : "Send Message"}
           </button>
           {emailSubmitted && (
             <p className="text-green-500 text-sm mt-2">
