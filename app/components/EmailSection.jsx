@@ -27,21 +27,14 @@ const EmailSection = () => {
 
     const response = await fetch(endPoint, options);
 
-    console.log("response", response);
-
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
 
     const resData = await response.json();
 
-    console.log("resData", resData);
-
     if (resData.status === "success") {
-      console.log("Message sent successfully");
       setEmailSubmitted(true);
-    } else {
-      console.error("Error in response data:", resData);
     }
   };
 
