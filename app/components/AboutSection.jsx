@@ -56,10 +56,9 @@ const AboutSection = () => {
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
           <p className="text-base lg:text-lg">
-            Junior Developer with a passion for creating dynamic and
-            user-friendly applications. With expertise in both frontend and
-            backend development, I offer well-rounded solutions to meet your
-            needs.
+            I&apos;m an enthusiastic and detail-oriented developer, seeking a
+            position to use my skills in coding, developing web and mobile
+            applications, and assisting in the timely completion of projects.
           </p>
           <div className="flex flex-row mt-8">
             <TabButton
