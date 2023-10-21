@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -34,18 +35,25 @@ const HeroSection = () => {
             />
           </h1>
           <p className="text-[#ADB7BE] text-base tex-lg mb-6 lg:text-xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta,
-            sequi magnam ducimus similique fuga ullam sed incidunt mollitia
-            eaque. Hic, laboriosam laborum! Sed, velit provident exercitationem
-            alias dicta repudiandae vitae?
+            Junior Developer with a passion for creating dynamic and
+            user-friendly applications. With expertise in both frontend and
+            backend development, I offer well-rounded solutions to meet your
+            needs.
           </p>
           <div>
             <button className="px-6 py-3 w-full sm:w-fit rounded-full mr-4 bg-white hover:bg-slate-200 text-black">
               Hire Me
             </button>
-            <button className="px-6 py-3 w-full sm:w-fit rounded-full bg-transparent hover:bg-slate-800 text-white border border-white mt-3">
-              Download CV
-            </button>
+            <Link
+              href={
+                "https://docs.google.com/document/d/1PG0WyLrGr92wBHe_ENicDxJxWF9t4YMFIQAk9kmM1_I/edit"
+              }
+              target="_blank"
+            >
+              <button className="px-6 py-3 w-full sm:w-fit rounded-full bg-transparent hover:bg-slate-800 text-white border border-white mt-3">
+                Download CV
+              </button>
+            </Link>
           </div>
         </motion.div>
         <motion.div
